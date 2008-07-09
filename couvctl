@@ -1,0 +1,39 @@
+#!/bin/bash
+
+COUVSTREAMUSER="couvstream"
+NICE=-2
+
+if test `whoami` = "root"
+then
+	case "$1" in
+		start)
+			echo "starting couvstream..."
+			sudo -u $COUVSTREAMUSER /usr/bin/strcond.py > /dev/null
+			PID=`ps aux | grep strcond | grep -v grep | awk '{ print $2 }'`
+			renice $NICE -p $PID
+			sudo -u $COUVSTREAMUSER /usr/bin/ircutd.py > /dev/null
+			PID=`ps aux | grep ircutd | grep -v grep | awk '{ print $2 }'`
+			renice $NICE -p $PID
+			sudo -u $COUVSTREAMUSER /usr/bin/selfmon.py > /dev/null
+			PID=`ps aux | grep selfmon | grep -v grep | awk '{ print $2 }'`
+			renice $NICE -p $PID
+			echo "couvstream started"
+			;;
+		stop)
+			echo "stopping couvstream..."
+			killall selfmon.py
+			killall ircutd.py
+			killall strcond.py
+			echo "couvstream stopped"
+			;;
+		restart)
+			couvctl stop
+			couvctl start
+			;;
+		*)
+			echo "usage: couvctl [start|stop|restart]"
+		;;
+	esac
+else
+	echo "run this startup script as root!"
+fi
