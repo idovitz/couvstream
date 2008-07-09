@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<general>
+		<systemname>couvstream</systemname>
+		<longname>Couvstream Foobar Hospital</longname>
+		<expiretime_users>60</expiretime_users>
+		<expiretime_admin>60</expiretime_admin>
+		<expiretime_viewer>1440</expiretime_viewer>
+		<style_name>default</style_name>
+		<recorder>no</recorder>
+		<decoders>no</decoders>
+		<local_network>192.168.0.0/16</local_network>
+	</general>
+	<database>
+		<dbHost>127.0.0.1</dbHost>
+		<database>couvstream</database>
+		<dbUser>root</dbUser>
+		<dbPassword></dbPassword>
+	</database>
+	<daemon>
+		<listenport>6888</listenport>
+		<beginPort>8000</beginPort>
+		<fromaddr></fromaddr>
+		<toaddr></toaddr>
+		<serverAddress></serverAddress>
+		<apacheUser>www-data</apacheUser>
+		<installPath>/var/www/couvstream</installPath>
+		<vlcPath>/usr/bin/vlc</vlcPath>
+		<nicePath>/usr/bin/nice</nicePath>>
+		<bitrates>[["CIF", "128", "1", "30", "Slowest"], ["CIF", "256", "1", "30", "Slow"], ["CIF", "384", "1", "20", "Fast"], ["4CIF", "512", "1", "30", "Extra fast"]]</bitrates>
+		<loglevel>1</loglevel>
+	</daemon>
+	<cameras>
+		<ircut>yes</ircut>
+		<camIprange></camIprange>
+		<camUser></camUser>
+		<camPass></camPass>
+		<ipt_excepts></ipt_excepts>
+	</cameras>
+</config>

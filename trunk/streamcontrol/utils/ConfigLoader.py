@@ -1,0 +1,15 @@
+##################################################
+# projectname: couvstream
+# Copyright (C) 2007  IJSSELLAND ZIEKENHUIS
+###################################################
+
+import elementtree.ElementTree as ET
+
+class ConfigLoader:
+	def __init__(self, filename):
+		tree = ET.parse(filename)
+		config = tree.getroot()
+		
+		for group in config:
+			for param in group:
+				setattr(self, param.tag, param.text)
