@@ -1,0 +1,71 @@
+<Location /streams>
+	AuthType Basic
+	AuthName "FamilieNet ToegangsControlle"
+	
+	AuthFormMySQLHost       localhost
+	AuthFormMySQLUsername   familienet
+	AuthFormMySQLPassword   changeme
+	AuthFormMySQLDB familienet
+	AuthFormSessionCookies On
+	AuthFormMySQLFieldExpiration expiration_date
+	AuthFormMySQLTableGID groups
+	AuthFormMySQLFieldGID cid
+	AuthFormPageLogin /index.php
+	AuthFormPageExpired /index.php?expired=1
+	AuthFormPageNotAllowed /index.php?groupblocked=1
+	AuthFormMySQLTableTracking tracking
+	AuthFormSessionDelete On
+	AuthFormLastPageKey gb
+	Require valid-user
+	
+	Allow from all
+</Location>
+
+<Location /admin>
+	AuthType Basic
+	AuthName "FamilieNet ToegangsControlle"
+	
+	AuthFormMySQLHost       localhost
+	AuthFormMySQLUsername   familienet
+	AuthFormMySQLPassword   changeme
+	AuthFormMySQLDB familienet
+	AuthFormSessionCookies On
+	AuthFormMySQLFieldExpiration expiration_date
+	AuthFormMySQLTableGID groups
+	AuthFormMySQLFieldGID cid
+	AuthFormPageLogin /index.php
+	AuthFormPageExpired /index.php?expired=1
+	AuthFormPageNotAllowed /index.php?groupblocked=1
+	AuthFormMySQLTableTracking tracking
+	AuthFormSessionDelete On
+	AuthFormLastPageKey gb
+	Require user admin
+
+	Deny from all
+	Allow from 10.0.0.0/255.0.0.0
+</Location>
+
+
+<Location /monitoring>
+	AuthType Basic
+	AuthName "FamilieNet ToegangsControlle"
+	
+	AuthFormMySQLHost       localhost
+	AuthFormMySQLUsername   familienet
+	AuthFormMySQLPassword   changeme
+	AuthFormMySQLDB familienet
+	AuthFormSessionCookies On
+	AuthFormMySQLFieldExpiration expiration_date
+	AuthFormMySQLTableGID groups
+	AuthFormMySQLFieldGID cid
+	AuthFormPageLogin /index.php
+	AuthFormPageExpired /index.php?expired=1
+	AuthFormPageNotAllowed /index.php?groupblocked=1
+	AuthFormMySQLTableTracking tracking
+	AuthFormSessionDelete On
+	AuthFormLastPageKey gb
+	Require user viewer
+	
+	Deny from all
+	Allow from 10.0.0.0/255.0.0.0
+</Location>

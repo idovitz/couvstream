@@ -1,0 +1,16 @@
+<VirtualHost *:80>
+	ServerAdmin you@yourdomain.com
+	ServerName sub.yourdomain.com
+	DocumentRoot /var/www/couvstream
+
+	<Directory /var/www/couvstream>
+		Options FollowSymLinks
+	</Directory>
+
+	ErrorLog /var/log/apache2/sub.yourdomain.com.error.log
+	CustomLog /var/log/apache2/sub.yourdomain.com.access.log combined
+
+	Include /etc/apache2/sites-available/extconf/famnet-auth
+
+	Include /etc/apache2/cameras/*
+</VirtualHost>
