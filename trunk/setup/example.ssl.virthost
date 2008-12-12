@@ -1,0 +1,22 @@
+<VirtualHost *:443>
+	ServerAdmin you@yourdomain.com
+	ServerName sub.yourdomain.com
+	DocumentRoot /var/www/couvstream
+	
+	<Directory /var/www/couvstream>
+                Options FollowSymLinks
+        </Directory>
+	
+	SSLEngine on
+	SSLCertificateFile /etc/apache2/ssl/sub.yourdomain.com.crt
+	SSLCertificateKeyFile /etc/apache2/ssl/sub.yourdomain.com.key
+	SSLCACertificateFile /etc/apache2/ssl/GTECyberTrustGlobalRoot.crt
+	SSLCACertificateFile /etc/apache2/ssl/ComodoSecurityServicesCA.crt
+
+	ErrorLog /var/log/apache2/sub.yourdomain.com.error.log
+	CustomLog /var/log/apache2/sub.yourdomain.com.access.log combined
+
+	Include /etc/apache2/sites-available/extconf/famnet-auth
+
+	Include /etc/apache2/cameras/*
+</VirtualHost>
