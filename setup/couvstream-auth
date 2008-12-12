@@ -1,11 +1,11 @@
 <Location /streams>
 	AuthType Basic
-	AuthName "FamilieNet ToegangsControlle"
+	AuthName "Couvstream Access"
 	
 	AuthFormMySQLHost       localhost
-	AuthFormMySQLUsername   familienet
+	AuthFormMySQLUsername   couvstream
 	AuthFormMySQLPassword   changeme
-	AuthFormMySQLDB familienet
+	AuthFormMySQLDB couvstream
 	AuthFormSessionCookies On
 	AuthFormMySQLFieldExpiration expiration_date
 	AuthFormMySQLTableGID groups
@@ -23,12 +23,12 @@
 
 <Location /admin>
 	AuthType Basic
-	AuthName "FamilieNet ToegangsControlle"
+	AuthName "Couvstream Access"
 	
 	AuthFormMySQLHost       localhost
-	AuthFormMySQLUsername   familienet
+	AuthFormMySQLUsername   couvstream
 	AuthFormMySQLPassword   changeme
-	AuthFormMySQLDB familienet
+	AuthFormMySQLDB couvstream
 	AuthFormSessionCookies On
 	AuthFormMySQLFieldExpiration expiration_date
 	AuthFormMySQLTableGID groups
@@ -42,18 +42,18 @@
 	Require user admin
 
 	Deny from all
-	Allow from 10.0.0.0/255.0.0.0
+	Allow from 192.168.0.0/255.255.0.0
 </Location>
 
 
 <Location /monitoring>
 	AuthType Basic
-	AuthName "FamilieNet ToegangsControlle"
+	AuthName "Couvstream Access"
 	
 	AuthFormMySQLHost       localhost
-	AuthFormMySQLUsername   familienet
+	AuthFormMySQLUsername   couvstream
 	AuthFormMySQLPassword   changeme
-	AuthFormMySQLDB familienet
+	AuthFormMySQLDB couvstream
 	AuthFormSessionCookies On
 	AuthFormMySQLFieldExpiration expiration_date
 	AuthFormMySQLTableGID groups
@@ -67,5 +67,5 @@
 	Require user viewer
 	
 	Deny from all
-	Allow from 10.0.0.0/255.0.0.0
+	Allow from 192.168.0.0/255.255.0.0
 </Location>
