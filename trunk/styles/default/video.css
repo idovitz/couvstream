@@ -1,0 +1,59 @@
+div.container
+{
+	position:absolute;
+	top:50%;
+	left:50%;
+	width:36em;
+	height:30em;
+	margin-top:-15em;
+	margin-left:-18em;
+	border:0px solid gray;
+	font-family: verdana;
+	font-size:10pt 
+	
+}
+
+div.footer
+{
+	color:#6699CC;
+	background-color:#fff;
+	margin-left:155px; 
+}
+
+div.mplayer
+{
+	height:30em;
+	background-image:url('img/tvSmall.jpg');
+	background-repeat:no-repeat;
+	background-position:center;
+}
+
+object
+{
+	margin:40px 0px 0px 66px;
+}
+
+embed
+{
+	margin:51px 0px 0px 1px;
+}
+
+img.back
+{
+	position:relative;
+	left:29px;
+	top:-28px;
+	border:0px;
+	
+}
+
+img.exit
+{
+	position:relative;
+	left:65px;
+	top:-63px;
+	border:0;
+}
+
+
+

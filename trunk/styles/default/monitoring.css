@@ -1,0 +1,131 @@
+
+div.container
+{
+	width:100%;
+	margin:0px;
+	border:1px solid gray;
+	line-height:150%;
+	font-family: verdana;
+	font-size:10pt 
+}
+
+div.header,div.footer
+{
+	padding:0.5em;
+	color:white;
+	background-color:#6699CC;
+	clear:left;
+}
+
+div.header
+{
+	height:39px
+}
+
+h1.header
+{
+	padding:0.5pt;
+	margin:0pt;
+	margin-left:0px;
+}
+
+img.reload
+{
+	float: left;
+	margin-top:5px;	
+	margin-left:5px;
+}
+
+
+div.content
+{
+	padding:10px;
+}
+
+img
+{
+	border:0px;	
+}
+
+fieldset
+{
+	margin-left:0px;
+	margin-top:0px;
+}
+
+div.cam1
+{
+	
+	width: 184px;
+	height:190px;
+	border:1px solid gray;
+	float: left;
+	margin-top:5px;	
+	margin-left:5px;
+	background-color:#E5EEFF;
+}
+div.cam_lock
+{
+	color: red;
+	width: 184px;
+	height:190px;
+	border:1px solid red;
+	float: left;
+	margin-top:5px;	
+	margin-left:5px;
+	background-color:#F2F2F2;
+}
+
+div.cam_enlarge
+{
+	
+	width: 712px;
+	height:607px;
+	border:1px solid gray;
+	float: left;
+	margin-top:5px;	
+	margin-left:5px;
+	background-color:#E5EEFF;
+}
+
+div.viewName
+{
+	font-weight: bold;
+	position:relative;
+	margin-left:5px; 	
+}
+
+Object
+{
+	margin-left: 2px;
+	margin-top: 2px;
+	border:1px solid black;
+}
+
+div.overview_webcam_name
+{
+	margin-left:2px;
+	margin-top:-3px;
+	font-weight: bold  
+	
+}
+
+img.overview_webcam_enlarge
+{
+	margin-left:155px;
+	margin-top:-23px; 	
+}
+
+img.overview_webcam_small
+{
+	margin-left:683px;
+	margin-top:4px; 	
+}
+
+img.overview_webcam_lock
+{
+	margin-left:131px;
+	margin-top:-16px; 	
+}
+
+

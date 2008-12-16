@@ -1,0 +1,110 @@
+*{
+	font-family:verdana;
+	font-size:10pt;
+	margin-top:0px;
+	margin-left:0px; 
+	
+}
+
+div.container
+{
+	position:absolute;
+	top:50%;
+	left:50%;
+	width:440px;
+	height:440px;
+	margin-top:-220px;
+	margin-left:-220px;
+	background-image:url('img/login.jpg');
+	background-repeat:no-repeat;
+	background-position:center;
+	
+}
+
+div.footer
+{
+	margin-top:110px; 
+	color: #6699CC;	
+}
+
+form
+{
+	position:absolute;
+	margin-top:225px;
+	margin-left:85px; 
+	
+}
+
+fieldset
+{
+	
+	border: 1px solid #006633;
+	width:265px;
+	height:93px
+}
+
+legend
+{
+	color: #fff;
+	background: #6699CC;
+	border: 1px solid #006633;
+	margin-left:5px
+}
+
+label
+{
+	width:7em;
+	float:left;
+	text-align:right;
+	margin: 0.1em 0em 0.0em 0.0em
+} 
+
+p.topmargin
+{
+	margin-top: 2px;	
+}
+
+p.topmarginPW
+{
+	margin-top: -8px;	
+}
+
+.submit input
+{
+	color: #fff;
+	background: #6699CC;
+	border: 1px outset #d7b9c9;
+	margin-top: -10px;
+	margin-bottom:5px;
+	margin-left: 96px;
+}
+
+input
+{
+	color: #781351;
+	background: #B3DAFF;
+	border: 1px solid #006633;
+}
+
+p.expired
+{
+	background-image: url(img/icon_error.gif);
+	background-repeat:no-repeat;
+	padding: 1px 1px 1px 29px;
+	margin: 0px 0px 0px 35px;
+	font-weight: bold;
+	color: red;
+	
+}
+
+div.error 
+{
+	background-color: #ffffe1;
+	background-image: url(img/required_bg.gif);
+	background-repeat: no-repeat;
+	background-position: top left;
+	color: #666666;
+	border: 1px solid #ff0000;
+}
+
+

@@ -1,0 +1,64 @@
+*
+{
+	margin-top:10px; 
+}
+div.container
+{
+	position:absolute;
+	top:50%;
+	left:50%;
+	width:57em;
+	height:46em;
+	margin-top:-23em;
+	margin-left:-28em;
+	border:0px solid gray;
+	font-family: verdana;
+	font-size:10pt 
+	
+}
+
+div.footer
+{
+	color:#6699CC;
+	background-color:#fff;
+	margin-top:-1px; 
+	
+}
+
+div.mplayer
+{
+	height:644px;
+	background-image:url('img/tvMedium.jpg');
+	background-repeat:no-repeat;
+	background-position:center;
+}
+
+object
+{
+	margin:61px 0px 0px 73px;
+}
+
+embed
+{
+	margin:80px 0px 0px 1px;
+}
+
+img.back
+{
+	position:relative;
+	left:10px;
+	top:-39px;
+	border:0;
+}
+
+img.exit
+{
+	position:relative;
+	left:60px;
+	top:-83px;
+	border:0;
+}
+
+
+
+
