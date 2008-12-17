@@ -53,6 +53,13 @@ CREATE TABLE `groups` (
   PRIMARY KEY  (`uid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+-- 
+-- Gegevens worden uitgevoerd voor tabel `groups`
+-- 
+
+INSERT INTO `groups` (`uid`, `cid`) VALUES ('viewer', -1),
+('admin', 0);
+
 -- --------------------------------------------------------
 
 -- 
@@ -96,3 +103,11 @@ CREATE TABLE `users` (
   `startdate` datetime default NULL,
   PRIMARY KEY  (`uid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- 
+-- Gegevens worden uitgevoerd voor tabel `users`
+-- 
+
+INSERT INTO `users` (`uid`, `password`, `name`, `expiredate`, `startdate`) VALUES ('admin', 'changeme', '', '2030-12-31 00:00:00', '0000-00-00 00:00:00'),
+('viewer', 'changeme', '', '2030-12-31 00:00:00', '0000-00-00 00:00:00');
+
