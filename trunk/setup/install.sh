@@ -29,8 +29,8 @@ then
 		then
 			mkdir -p $CONFIGDIR/cams
 			cp ../config/example-config.xml $CONFIGDIR/config.xml
+			cp couvstream-auth $CONFIGDIR/config.xml
 		fi
-		
 
 		######### make apache config files
 		for i in `seq 1 $NRCAMS`
