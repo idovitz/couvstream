@@ -5,10 +5,10 @@ CONFIGDIR=/etc/couvstream
 if test `whoami` = "root"
 then
 	echo -n "Do you realy want to install couvstream, this will overide all configuration!!!!
-[ja/nee]: "
+[yes/no]: "
 	read INSTALL
 
-	if [ "$INSTALL" = "ja" ]
+	if [ "$INSTALL" = "yes" ]
 	then
 		PORTB=8000
 		echo -en "\nBegin port range for stream processes [8000]: "
@@ -37,6 +37,8 @@ then
 		do
 			./addcam $i $PORTB > $CONFIGDIR/cams/cam$i
 		done
+		
+		./linking.sh
 	fi
 else
 	echo "run as root!"

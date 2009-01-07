@@ -15,3 +15,4 @@ ln -s `pwd`/../streamcontrol/selfmon.py /usr/bin/
 ln -s `pwd`/../streamcontrol/streamchecker.py /usr/bin/
 ln -s `pwd`/../streamcontrol/streamcounter.py /usr/bin/
 ln -s `pwd`/../streamcontrol/filterchecker.py /usr/bin/
+ln -s `pwd`/../couvctl /usr/bin/
