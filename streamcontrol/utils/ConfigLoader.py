@@ -3,7 +3,7 @@
 # Copyright (C) 2007  IJSSELLAND ZIEKENHUIS
 ###################################################
 
-import elementtree.ElementTree as ET
+import xml.etree.ElementTree as ET
 
 class ConfigLoader:
 	def __init__(self, filename):
