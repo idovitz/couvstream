@@ -16,7 +16,7 @@
 	ErrorLog /var/log/apache2/sub.yourdomain.com.error.log
 	CustomLog /var/log/apache2/sub.yourdomain.com.access.log combined
 
-	Include /etc/apache2/sites-available/extconf/famnet-auth
+	Include /etc/couvstream/couvstream-auth
 
-	Include /etc/apache2/cameras/*
+	Include /etc/couvstream/cams/*
 </VirtualHost>
