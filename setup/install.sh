@@ -38,6 +38,7 @@ then
 			./addcam $i $PORTB > $CONFIGDIR/cams/cam$i
 		done
 		
+		chmod 775 linking.sh
 		./linking.sh
 	fi
 else
