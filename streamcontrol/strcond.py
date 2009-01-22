@@ -89,7 +89,7 @@ class StreamControl:
 		ports = self.getPorts(cid, bitrate)
 		
 		# vlc arguments (opens 2 ports with mux http:// and mms://)
-		cmdArg = "%s -n 2 %s --no-audio -d 'http://%s:%s@%s/axis-cgi/mjpg/video.cgi?resolution=%s&compression=%s' --sout '#transcode{vcodec=DIV3,vb=%s,scale=%s,fps=18,croptop=10,cropleft=10,cropright=10,cropbottom=10}:duplicate{dst=std{access=http,mux=asf,dst=:%s},dst=std{access=mmsh,mux=asfh,dst=:%s}}'" % (self.config.nicePath, self.config.vlcPath, self.config.camUser, self.config.camPass, cam[2], self.bitrates[bitrate][0], self.bitrates[bitrate][3], self.bitrates[bitrate][0], self.bitrates[bitrate][1], self.bitrates[bitrate][2], ports[0], ports[1])
+		cmdArg = "%s -n 2 %s --no-audio -d 'http://%s:%s@%s/axis-cgi/mjpg/video.cgi?resolution=%s&compression=%s' --sout '#transcode{vcodec=DIV3,vb=%s,scale=%s,fps=18,croptop=10,cropleft=10,cropright=10,cropbottom=10}:duplicate{dst=std{access=http,mux=asf,dst=:%s},dst=std{access=mmsh,mux=asfh,dst=:%s}}'" % (self.config.nicePath, self.config.vlcPath, self.config.camUser, self.config.camPass, cam[2], self.bitrates[bitrate][0], self.bitrates[bitrate][3], self.bitrates[bitrate][1], self.bitrates[bitrate][2], ports[0], ports[1])
 		
 		# log
 		self.l.log(2, "start vlc with cmd: %s" % cmdArg)
@@ -292,7 +292,7 @@ class StreamControl:
 		for i in range(100):
 			retArr.append([])
 		
-		args = " -et --numeric-hosts --numeric-ports | grep -v tcp6 | grep ESTABLISHED%s | grep -v 9999 | grep -v 3306" % self.config.apacheUser
+		args = " -et --numeric-hosts --numeric-ports | grep -v tcp6 | grep ESTABLISHED %s | grep -v 9999 | grep -v 3306" % self.config.apacheUser
 		p = Popen("/bin/netstat" + args, shell=True, stdout=PIPE)
 		cons = p.stdout.readlines()
 		p.stdout.close()
@@ -336,7 +336,7 @@ class StreamControl:
 			for port in prPorts.stdout.readlines():
 				port = port[port.find("0.0.0.0")+8:port.find("0.0.0.0")+12]
 				# check for connections
-				args = " -et --numeric-hosts --numeric-ports | grep -v tcp6 | grep %s | grep ESTABLISHED%s" % (port, self.config.apacheUser)
+				args = " -et --numeric-hosts --numeric-ports | grep -v tcp6 | grep %s | grep ESTABLISHED %s" % (port, self.config.apacheUser)
 				p = Popen("/bin/netstat" + args, shell=True, stdout=PIPE)
 				if len(p.stdout.readlines()) > 0:
 					kill = 0
