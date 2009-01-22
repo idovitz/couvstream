@@ -292,7 +292,7 @@ class StreamControl:
 		for i in range(100):
 			retArr.append([])
 		
-		args = " -et --numeric-hosts --numeric-ports | grep -v tcp6 | grep ESTABLISHED %s | grep -v 9999 | grep -v 3306" % self.config.apacheUser
+		args = " -et --numeric-hosts --numeric-ports | grep -v tcp6 | grep 'ESTABLISHED %s' | grep -v 9999 | grep -v 3306" % self.config.apacheUser
 		p = Popen("/bin/netstat" + args, shell=True, stdout=PIPE)
 		cons = p.stdout.readlines()
 		p.stdout.close()
@@ -336,7 +336,7 @@ class StreamControl:
 			for port in prPorts.stdout.readlines():
 				port = port[port.find("0.0.0.0")+8:port.find("0.0.0.0")+12]
 				# check for connections
-				args = " -et --numeric-hosts --numeric-ports | grep -v tcp6 | grep %s | grep ESTABLISHED %s" % (port, self.config.apacheUser)
+				args = " -et --numeric-hosts --numeric-ports | grep -v tcp6 | grep %s | grep 'ESTABLISHED %s'" % (port, self.config.apacheUser)
 				p = Popen("/bin/netstat" + args, shell=True, stdout=PIPE)
 				if len(p.stdout.readlines()) > 0:
 					kill = 0
