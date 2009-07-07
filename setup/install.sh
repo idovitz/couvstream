@@ -29,7 +29,7 @@ then
 		then
 			mkdir -p $CONFIGDIR/cams
 			cp ../config/example-config.xml $CONFIGDIR/config.xml
-			cp couvstream-auth $CONFIGDIR/config.xml
+			cp couvstream-auth $CONFIGDIR/
 		fi
 
 		######### make apache config files
