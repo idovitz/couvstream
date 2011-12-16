@@ -6,6 +6,7 @@ rm /usr/bin/selfmon.py
 rm /usr/bin/streamchecker.py
 rm /usr/bin/streamcounter.py
 rm /usr/bin/filterchecker.py
+rm /usr/bin/couvctl
 
 find ../streamcontrol/ -name "*.py" -type f -exec chmod 775 {} \;
 

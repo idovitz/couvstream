@@ -4,7 +4,7 @@
 # Copyright (C) 2007  IJSSELLAND ZIEKENHUIS
 ###################################################
 
-import os, sys, string, SOAPpy, time, socket, urllib2
+import os, sys, string, SOAPpy, time, socket, urllib2, psutil
 from subprocess import Popen, PIPE
 from utils import *
 
@@ -89,7 +89,9 @@ class StreamControl:
 		ports = self.getPorts(cid, bitrate)
 		
 		# vlc arguments (opens 2 ports with mux http:// and mms://)
-		cmdArg = "%s -n 2 %s --no-audio -d 'http://%s:%s@%s/axis-cgi/mjpg/video.cgi?resolution=%s&compression=%s' --sout '#transcode{vcodec=DIV3,vb=%s,scale=%s,fps=18,croptop=10,cropleft=10,cropright=10,cropbottom=10}:duplicate{dst=std{access=http,mux=asf,dst=:%s},dst=std{access=mmsh,mux=asfh,dst=:%s}}'" % (self.config.nicePath, self.config.vlcPath, self.config.camUser, self.config.camPass, cam[2], self.bitrates[bitrate][0], self.bitrates[bitrate][3], self.bitrates[bitrate][1], self.bitrates[bitrate][2], ports[0], ports[1])
+		cmdArg = "%s -n 2 %s --no-audio -d 'http://%s:%s@%s/axis-cgi/mjpg/video.cgi?resolution=%s&compression=%s' --sout '#transcode{vcodec=h264,venc=x264{%s},vb=%s,scale=%s,acodec=none}:std{access=http{mime=video/x-flv},mux=ffmpeg{mux=flv},dst=:%s}'" % (self.config.nicePath, self.config.vlcPath, self.config.camUser, self.config.camPass, cam[2], self.bitrates[bitrate][0], self.bitrates[bitrate][3], self.bitrates[bitrate][5], self.bitrates[bitrate][1], self.bitrates[bitrate][2], ports[0])
+		
+		#cmdArg = "%s -n 2 %s --no-audio -d 'http://%s:%s@%s/axis-cgi/mjpg/video.cgi?resolution=%s&compression=%s' --sout '#transcode{vcodec=h264,venc=x264{%s},vb=%s,scale=%s,acodec=none}:duplicate{dst=std{access=http{mime=video/x-flv},mux=ffmpeg{mux=flv},dst=:%s},dst=std{mux=ts,dst=:%s}}'" % (self.config.nicePath, self.config.vlcPath, self.config.camUser, self.config.camPass, cam[2], self.bitrates[bitrate][0], self.bitrates[bitrate][3], self.bitrates[bitrate][5], self.bitrates[bitrate][1], self.bitrates[bitrate][2], ports[0], ports[1])
 		
 		# log
 		self.l.log(2, "start vlc with cmd: %s" % cmdArg)
@@ -273,43 +275,38 @@ class StreamControl:
 	###
 	# kill all streams from ip	
 	def killStream(self, ip):
-		prProcs = Popen("/bin/ps" + " ax | grep %s | grep vlc" % ip, shell=True, stdout=PIPE)
-		procs = prProcs.stdout.readlines()
-		prProcs.stdout.close()
-		self.wait(prProcs.pid)
-		
-		for proc in procs:
-			# get pid and kill it!
-			proc = proc.lstrip()
-			pid = proc[0:proc.find(" ")]
-			prKill = Popen("/bin/kill" + " -9 %s" % pid, shell=True)
-			self.wait(prKill.pid)
+		for p in psutil.process_iter():
+			if p.name == "vlc":
+				if ''.join(p.cmdline).find('@%s/' % ip) != -1:
+					p.kill()
 	
 	###
 	# count running streams
 	def countStreams(self):
-		retArr = []
-		for i in range(100):
-			retArr.append([])
+		streams = 0
+		retArr = {}		
 		
-		args = " -et --numeric-hosts --numeric-ports | grep -v tcp6 | grep 'ESTABLISHED %s' | grep -v 9999 | grep -v 3306" % self.config.apacheUser
-		p = Popen("/bin/netstat" + args, shell=True, stdout=PIPE)
-		cons = p.stdout.readlines()
-		p.stdout.close()
-		self.wait(p.pid)
-		streams = len(cons)
-		if len(cons) > 0:
-			for con in cons:
-				con = con[con.find("127.0.0.1",con.find("127.0.0.1")+1):]
-				p = int(con[0:con.find(" ")].split(":")[1])
-				
-				b = (p-int(self.config.beginPort))/100
-				c = (p-int(self.config.beginPort))-b*100
-				
-				try:
-					retArr[c].append(b)
-				except:
-					retArr[c] = [b]
+		for p in psutil.process_iter():
+			if p.name == "vlc":
+				for con in p.get_connections(kind="tcp"):
+					if con.status == 'ESTABLISHED' and con.remote_address[0] == "127.0.0.1":
+						streams += 1
+					
+						try:
+							p = con.local_address[1]
+					
+							b = (p-int(self.config.beginPort))/100
+							c = (p-int(self.config.beginPort))-b*100
+					
+							self.l.log(3, "countstreams5 %s - %s" % (b, c))
+					
+							try:
+								retArr["cam%s" % c].append(b)
+							except:
+								retArr["cam%s" % c] = [b]
+						except:
+							self.l.log(3, "countstreams6 %s" % (con))
+		
 		
 		self.l.log(3, "countstreams: %s" % [streams, retArr])
 		return [streams, retArr]
@@ -318,45 +315,30 @@ class StreamControl:
 	# check streams for activaty
 	def checkStreams(self):
 		report = []
+		self.l.log(3, "checkStreams started")
 		
-		# get running vlc processes
-		prProcs = Popen("/bin/ps" + " axc" + " | grep vlc", shell=True, stdout=PIPE)
-		procs = prProcs.stdout.readlines()
-		prProcs.stdout.close()
-		self.wait(prProcs.pid)
-		
-		for proc in procs:
-			# get pid
-			proc = proc.lstrip()
-			pid = proc[0:proc.find(" ")]
-		
-			# get listening ports for process
-			prPorts = Popen("/bin/netstat" + " -lnpt | grep %s | grep -v tcp6" % pid, shell=True, stdout=PIPE)
-			kill = 1
-			for port in prPorts.stdout.readlines():
-				port = port[port.find("0.0.0.0")+8:port.find("0.0.0.0")+12]
-				# check for connections
-				args = " -et --numeric-hosts --numeric-ports | grep -v tcp6 | grep %s | grep 'ESTABLISHED %s'" % (port, self.config.apacheUser)
-				p = Popen("/bin/netstat" + args, shell=True, stdout=PIPE)
-				if len(p.stdout.readlines()) > 0:
-					kill = 0
-				p.stdout.close()
-				self.wait(p.pid)
-			prPorts.stdout.close()
-			self.wait(prPorts.pid)
+		for p in psutil.process_iter():
+			if p.name == "vlc":
+				self.l.log(3, "checkStreams: %s" % p)
+				kill = 1
+				for con in p.get_connections(kind="tcp"):
+					if con.family == socket.AF_INET and con.status == "LISTEN":
+						port = con.local_address[1]
+						for proxycon in p.get_connections(kind="tcp"):
+							if proxycon.family == socket.AF_INET and proxycon.status == "ESTABLISHED" and proxycon.local_address[1] == port:
+								kill = 0
 				
-			# append to kill list
-			report.append([pid, kill])
+				# append to kill list
+				self.l.log(3, "checkStreams: %s" % [p.pid, kill])
+				report.append([p.pid, kill])
 			
 		# check nomination list for non-existable pid's
 		for nproc in self.nomKill:
 			exist = 0
-			for proc in procs:
-				# get pid
-				proc = proc.lstrip()
-				pid = proc[0:proc.find(" ")]
-				if pid == nproc:
-					exist = 1
+			for p in psutil.process_iter():
+				if p.name == "vlc":
+					if p.pid == nproc:
+						exist = 1
 			
 			if exist == 0:
 				self.nomKill.remove(nproc)
@@ -366,8 +348,8 @@ class StreamControl:
 		oldNom = self.nomKill[:]
 		for proc in report:
 			if proc[1] == 1 and proc[0] in self.nomKill:
-				prKill = Popen("/bin/kill" + " -9 %s" % proc[0], shell=True)
-				self.wait(prKill.pid)
+				process = psutil.Process(proc[0])
+				process.kill()
 				msg += "killed %s\n" % proc[0]
 				self.nomKill.remove(proc[0])
 			elif proc[0] in self.nomKill:

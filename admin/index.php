@@ -71,8 +71,15 @@ echo "</pre>";*/
 			$style = array("even","odd");
 			foreach($usrs->getUsers() as $user)
 			{
-					echo  '<p class="'.$style[$i%2].'"><a href="index.php?delete='.$user["uid"].'" onclick="return confirmSubmit()"><img src="/styles/'.style_name.'/img/admin/delete.gif" alt="verwijderen" hspace="2" /></a> <a href="add_user.php?edit=1&uid='.$user["uid"].'"><img src="/styles/'.style_name.'/img/admin/edit.gif" alt="bewerken" hspace="2" /></a> <a href="print.php?uid='.$user["uid"].'" target="_blank"><img src="/styles/'.style_name.'/img/admin/print.gif" alt="voorwaarden printen" hspace="2" /></a></p><p class="'.$style[$i%2].'">'.$user["name"].'</p><p class="'.$style[$i%2].'">'.$user["camname"].'</p><p class="'.$style[$i%2].'">'.$user["startdate"].'</p><p class="'.$style[$i%2].'">'.$user["expiredate"].'</p><p class="'.$style[$i%2].'">'.count($streams[$user["cid"]]).'</p>';
-					$i++;
+				$streamcount = 0;
+				$camstr = 'cam'.$user["cid"];
+				
+				if(isset($streams->$camstr)){
+					$streamcount = count($streams->$camstr);
+				}
+				
+				echo  '<p class="'.$style[$i%2].'"><a href="index.php?delete='.$user["uid"].'" onclick="return confirmSubmit()"><img src="/styles/'.style_name.'/img/admin/delete.gif" alt="verwijderen" hspace="2" /></a> <a href="add_user.php?edit=1&uid='.$user["uid"].'"><img src="/styles/'.style_name.'/img/admin/edit.gif" alt="bewerken" hspace="2" /></a> <a href="print.php?uid='.$user["uid"].'" target="_blank"><img src="/styles/'.style_name.'/img/admin/print.gif" alt="voorwaarden printen" hspace="2" /></a></p><p class="'.$style[$i%2].'">'.$user["name"].'</p><p class="'.$style[$i%2].'">'.$user["camname"].'</p><p class="'.$style[$i%2].'">'.$user["startdate"].'</p><p class="'.$style[$i%2].'">'.$user["expiredate"].'</p><p class="'.$style[$i%2].'">'.$streamcount.'</p>';
+				$i++;
 			}
 			?>
 		</div>

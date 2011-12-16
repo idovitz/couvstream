@@ -16,7 +16,7 @@ class Stream
 	public function getUrl()
 	{
 		$url = $this->muxstr."://".$_SERVER["SERVER_NAME"];
-		$url .= "/streams/cam".$this->cid."/".$this->bitrate."/".$this->mux."/stream.asf";
+		$url .= "/streams/cam".$this->cid."/".$this->bitrate."/".$this->mux."/stream.".$this->ext;
 		
 		return $url;
 	}
@@ -34,13 +34,15 @@ class Stream
 	
 	private function setMux()
 	{
-		if(strpos($_SERVER["HTTP_USER_AGENT"], "Windows"))
+		if(strstr($_SERVER['HTTP_USER_AGENT'],'iPhone') || strstr($_SERVER['HTTP_USER_AGENT'],'iPod') || strstr($_SERVER['HTTP_USER_AGENT'],'iPad'))
 		{
-			$this->muxstr = "mms";
+			$this->muxstr = "http";
 			$this->mux = "1";
+			$this->ext = "mp4";
 		}else{
 			$this->muxstr = "http";
 			$this->mux = "0";
+			$this->ext = "flv";
 		}
 	}
 	

@@ -4,35 +4,35 @@ CAMNR=$1
 PORTB=$2
 
 echo "
-ProxyPass /streams/cam$CAMNR/0/0/stream.asf http://127.0.0.1:$[PORTB+CAMNR]
-ProxyPassReverse /streams/cam$CAMNR/0/0/stream.asf http://127.0.0.1:$[PORTB+CAMNR]
+ProxyPass /streams/cam$CAMNR/0/0/stream.flv http://127.0.0.1:$[PORTB+CAMNR]
+ProxyPassReverse /streams/cam$CAMNR/0/0/stream.flv http://127.0.0.1:$[PORTB+CAMNR]
 
-ProxyPass /streams/cam$CAMNR/0/1/stream.asf http://127.0.0.1:$[PORTB+100+CAMNR]
-ProxyPassReverse /streams/cam$CAMNR/0/1/stream.asf http://127.0.0.1:$[PORTB+100+CAMNR]
+ProxyPass /streams/cam$CAMNR/0/1/stream.mp4 http://127.0.0.1:$[PORTB+100+CAMNR]
+ProxyPassReverse /streams/cam$CAMNR/0/1/stream.mp4 http://127.0.0.1:$[PORTB+100+CAMNR]
 
-ProxyPass /streams/cam$CAMNR/1/0/stream.asf http://127.0.0.1:$[PORTB+200+CAMNR]
-ProxyPassReverse /streams/cam$CAMNR/1/0/stream.asf http://127.0.0.1:$[PORTB+200+CAMNR]
+ProxyPass /streams/cam$CAMNR/1/0/stream.flv http://127.0.0.1:$[PORTB+200+CAMNR]
+ProxyPassReverse /streams/cam$CAMNR/1/0/stream.flv http://127.0.0.1:$[PORTB+200+CAMNR]
 
-ProxyPass /streams/cam$CAMNR/1/1/stream.asf http://127.0.0.1:$[PORTB+300+CAMNR]
-ProxyPassReverse /streams/cam$CAMNR/1/1/stream.asf http://127.0.0.1:$[PORTB+300+CAMNR]
+ProxyPass /streams/cam$CAMNR/1/1/stream.mp4 http://127.0.0.1:$[PORTB+300+CAMNR]
+ProxyPassReverse /streams/cam$CAMNR/1/1/stream.mp4 http://127.0.0.1:$[PORTB+300+CAMNR]
 
-ProxyPass /streams/cam$CAMNR/2/0/stream.asf http://127.0.0.1:$[PORTB+400+CAMNR]
-ProxyPassReverse /streams/cam$CAMNR/2/0/stream.asf http://127.0.0.1:$[PORTB+400+CAMNR]
+ProxyPass /streams/cam$CAMNR/2/0/stream.flv http://127.0.0.1:$[PORTB+400+CAMNR]
+ProxyPassReverse /streams/cam$CAMNR/2/0/stream.flv http://127.0.0.1:$[PORTB+400+CAMNR]
 
-ProxyPass /streams/cam$CAMNR/2/1/stream.asf http://127.0.0.1:$[PORTB+500+CAMNR]
-ProxyPassReverse /streams/cam$CAMNR/2/1/stream.asf http://127.0.0.1:$[PORTB+500+CAMNR]
+ProxyPass /streams/cam$CAMNR/2/1/stream.mp4 http://127.0.0.1:$[PORTB+500+CAMNR]
+ProxyPassReverse /streams/cam$CAMNR/2/1/stream.mp4 http://127.0.0.1:$[PORTB+500+CAMNR]
 
-ProxyPass /streams/cam$CAMNR/3/0/stream.asf http://127.0.0.1:$[PORTB+600+CAMNR]
-ProxyPassReverse /streams/cam$CAMNR/3/0/stream.asf http://127.0.0.1:$[PORTB+600+CAMNR]
+ProxyPass /streams/cam$CAMNR/3/0/stream.flv http://127.0.0.1:$[PORTB+600+CAMNR]
+ProxyPassReverse /streams/cam$CAMNR/3/0/stream.flv http://127.0.0.1:$[PORTB+600+CAMNR]
 
-ProxyPass /streams/cam$CAMNR/3/1/stream.asf http://127.0.0.1:$[PORTB+700+CAMNR]
-ProxyPassReverse /streams/cam$CAMNR/3/1/stream.asf http://127.0.0.1:$[PORTB+700+CAMNR]
+ProxyPass /streams/cam$CAMNR/3/1/stream.mp4 http://127.0.0.1:$[PORTB+700+CAMNR]
+ProxyPassReverse /streams/cam$CAMNR/3/1/stream.mp4 http://127.0.0.1:$[PORTB+700+CAMNR]
 
-ProxyPass /streams/cam$CAMNR/4/0/stream.asf http://127.0.0.1:$[PORTB+800+CAMNR]
-ProxyPassReverse /streams/cam$CAMNR/4/0/stream.asf http://127.0.0.1:$[PORTB+800+CAMNR]
+ProxyPass /streams/cam$CAMNR/4/0/stream.flv http://127.0.0.1:$[PORTB+800+CAMNR]
+ProxyPassReverse /streams/cam$CAMNR/4/0/stream.flv http://127.0.0.1:$[PORTB+800+CAMNR]
 
-ProxyPass /streams/cam$CAMNR/4/1/stream.asf http://127.0.0.1:$[PORTB+900+CAMNR]
-ProxyPassReverse /streams/cam$CAMNR/4/1/stream.asf http://127.0.0.1:$[PORTB+900+CAMNR]
+ProxyPass /streams/cam$CAMNR/4/1/stream.mp4 http://127.0.0.1:$[PORTB+900+CAMNR]
+ProxyPassReverse /streams/cam$CAMNR/4/1/stream.mp4 http://127.0.0.1:$[PORTB+900+CAMNR]
 
 <Location /streams/cam$CAMNR>
         Require group $CAMNR 0

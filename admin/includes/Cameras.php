@@ -35,7 +35,8 @@ class Cameras
 		try {
 			$client = new SoapClient(null, array('location' => "http://localhost:".listenport."/", "uri" => "urn:couvstream", "style" => SOAP_RPC, "use" => SOAP_ENCODED, 'soap_version'  => SOAP_1_1, "trace" => 1, "exceptions"=>0, "encoding" => "utf-8") );
 		} catch (Exception $e) {
-			echo "<b>Connectie naar de streamer daemon is mislukt. Neem contact op met uw systeembeheerder.</b>";
+			echo "<b>1Connectie naar de streamer daemon is mislukt. Neem contact op met uw systeembeheerder.</b>";
+			echo $e;
 		}
 		
 		if($client->blockCam(new SoapParam($cid, "cid")))
@@ -51,7 +52,8 @@ class Cameras
 		try {
 			$client = new SoapClient(null, array('location' => "http://localhost:".listenport."/", "uri" => "urn:couvstream", "style" => SOAP_RPC, "use" => SOAP_ENCODED, 'soap_version'  => SOAP_1_1, "trace" => 1, "exceptions"=>0, "encoding" => "utf-8") );
 		} catch (Exception $e) {
-			echo "<b>Connectie naar de streamer daemon is mislukt. Neem contact op met uw systeembeheerder.</b>";
+			echo "<b>2Connectie naar de streamer daemon is mislukt. Neem contact op met uw systeembeheerder.</b>";
+			echo $e;
 		}
 		
 		if($client->unblockCam(new SoapParam($cid, "cid")))
@@ -65,8 +67,12 @@ class Cameras
 	public function countStreams($cid="all")
 	{
 		try {
-			$client = new SoapClient(null, array('location' => "http://localhost:".listenport."/", "uri" => "urn:couvstream", "style" => SOAP_RPC, "use" => SOAP_ENCODED, 'soap_version'  => SOAP_1_1, "trace" => 1, "exceptions"=>0, "encoding" => "utf-8") );
+//			$client = new SoapClient(null, array('location' => "http://localhost:".listenport."/", "uri" => "urn:couvstream"/*, "style" => SOAP_RPC, "use" => SOAP_ENCODED*/, 'soap_version'  => SOAP_1_1, "trace" => 1, "exceptions"=>0, "encoding" => "utf-8") );
+			$client = new SoapClient(null, array('location' => "http://localhost:".listenport, "trace" => 1, "exceptions"=>0, "encoding" => "utf-8", "uri" => "urn:couvstream") );
 		} catch (Exception $e) {
+			echo "<pre>";
+                        var_dump($e);
+			echo "</pre>";
 			exit("<b>Connectie naar de streamer daemon is mislukt. Neem contact op met uw systeembeheerder.</b>");
 		}
 		
@@ -81,7 +87,14 @@ class Cameras
 				return $cArr[1][$cid];
 			}
 		}else if(is_soap_fault($cArr)){
-			exit("<b><b>Connectie naar de streamer daemon is mislukt. Neem contact op met uw systeembeheerder.</b></b>");
+			echo "<pre>";
+			var_dump($cArr);
+			echo "REQUEST HEADERS:\n" . $client->__getLastRequestHeaders() . "\n";
+			echo "REQUEST:\n" . $client->__getLastRequest() . "\n";
+			echo "RESPONSE HEADERS:\n" . $client->__getLastResponseHeaders() . "\n";
+			echo "Response:\n" . $client->__getLastResponse() . "\n";
+			echo "</pre>";
+			exit("<b>4Connectie naar de streamer daemon is mislukt. Neem contact op met uw systeembeheerder.</b>");
 		}else{
 			return False;
 			
