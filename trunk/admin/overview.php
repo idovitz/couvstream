@@ -16,6 +16,7 @@ if($_GET["unblock"])
 
 $camArr = $cameras->getCameras();
 $streams = $cameras->countStreams();
+
 ?>
 
 <html>
@@ -58,8 +59,14 @@ $streams = $cameras->countStreams();
 				<?
 				echo $cam["name"];
 				
-				if(count($streams[$cam["cid"]]))
-					echo "<img class=\"overview_webcam_eyes\" src=\"/styles/".style_name."/img/eyes.gif\" alt=\"".count($streams[$cam["cid"]])." kijker(s)\" />";
+				$streamcount = 0;
+				$camstr = 'cam'.$cam["cid"];
+				if(isset($streams->$camstr)){
+					$streamcount = count($streams->$camstr);
+				}
+				
+				if($streamcount > 0)
+					echo "<img class=\"overview_webcam_eyes\" src=\"/styles/".style_name."/img/eyes.gif\" alt=\"".$streamcount." kijker(s)\" />";
 				
 				if($cam["blocked"] == 0)
 				{
@@ -104,6 +111,8 @@ $streams = $cameras->countStreams();
 				  output += '<param name="ShowToolbar" value="0">';
 				  output += '<param name="AutoStart" value="1">';
 				  output += '<param name="StretchToFit" value="1">';
+				  output += '<PARAM NAME="MediaUsername" VALUE="root">';
+                                  output += '<PARAM NAME="MediaPassword" VALUE="yzhc4m3r4">';
 				  // Remove the '//' for the ptz settings below to use the code for click-in-image. 
 				  output += '<param name="PTZControlURL" value="';
 				  output += BaseURL;
@@ -120,7 +129,8 @@ $streams = $cameras->countStreams();
 				  var AppletDir = BaseURL + "java/ama";
 				  var VideoPath = "axis-cgi/mjpg/video.cgi?resolution=QCIF&compression=70";
 				  var restOfPath = "";
-				  var VideoURL = BaseURL + VideoPath;
+				  // var VideoURL = BaseURL + VideoPath;
+				var VideoURL = "http://root:yzhc4m3r4@10.3.1.78/" + VideoPath;
 				
 				  output  = '<APPLET archive="ama.jar" codeBase="';
 				  output += AppletDir + '"';
@@ -133,6 +143,8 @@ $streams = $cameras->countStreams();
 				  output += '<PARAM NAME="archive" VALUE="ama.jar">';
 				  output += '<PARAM NAME="codebase" VALUE="';
 				  output += AppletDir + '">';
+				  output += '<PARAM NAME="MediaUsername" VALUE="root">';
+                                  output += '<PARAM NAME="MediaPassword" VALUE="yzhc4m3r4">';
 				  output += '<PARAM NAME="ama_cgi-path" VALUE="axis-cgi">';
 				  output += '<PARAM NAME="cache_archive" VALUE="ama.jar, ptz.jar">';
 				  output += '<PARAM NAME="cache_version" VALUE="1.0.0.0, 1.2.0.0">';

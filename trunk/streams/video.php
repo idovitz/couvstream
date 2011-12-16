@@ -27,17 +27,18 @@ $mediaUrl = $stream->getUrl();
 				echo ("<link rel='stylesheet' type='text/css' href='/styles/".style_name."/video4cif.css' />");
 				$object_width = "614";
 				$object_height = "460";
-				$scale_href = "cif";
+				$scale_href = "4cif";
 		}
 		else
 		{
 				echo ("<link rel='stylesheet' type='text/css' href='/styles/".style_name."/video.css' />");
 				$object_width = "352";
 				$object_height = "288";
-				$scale_href = "4cif";
+				$scale_href = "cif";
 		}
 		?>
-				
+		<script type="text/javascript" src="/flowplayer/flowplayer.min.js"></script>
+		<script type="text/javascript" src="/flowplayer/flowplayer.ipad-3.2.2.min.js"></script>
 		<title><? echo longname; ?></title>
 	</head>
 <body>
@@ -45,36 +46,63 @@ $mediaUrl = $stream->getUrl();
 <div class="container">
 	
 	<div class="mplayer">
-		<OBJECT ID="MediaPlayer" WIDTH="<? echo ("$object_width");?>" HEIGHT="<? echo ("$object_height");?>" CLASSID="CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95" STANDBY="Loading Windows Media Player components..." TYPE="application/x-oleobject">
-			<PARAM NAME="FileName" VALUE="<? echo $mediaUrl; ?>">
-			<PARAM name="ShowControls" VALUE="false">
-			<PARAM name="ShowStatusBar" value="true">
-			<PARAM name="ShowDisplay" VALUE="false">
-			<PARAM name="autostart" VALUE="true">
-			<PARAM name="loop" VALUE="false">
-			<EMBED 
-				TYPE="application/x-mplayer2" 
-				SRC="<? echo $mediaUrl; ?>"
-				NAME="MediaPlayer"
-				WIDTH="<? echo ("$object_width");?>" 
-				HEIGHT="<? echo ("$object_height");?>"
-				ShowControls="0" ShowStatusBar="1" ShowDisplay="0" autostart="true" loop="false"></> 
-			</EMBED>
-		</OBJECT>
+		<div id="flowplayerDiv">
+		
+		
+		<?
+		if(strstr($_SERVER['HTTP_USER_AGENT'],'iPhone') || strstr($_SERVER['HTTP_USER_AGENT'],'iPod') || strstr($_SERVER['HTTP_USER_AGENT'],'iPad'))
+		{
+		?>
+		<video src="<? echo $mediaUrl; ?>" />
+		
+		<?
+		}else{
+		?>
+		<a  
+			 href="<? echo $mediaUrl; ?>"
+			 style="display:block;width:<? echo ("$object_width");?>px;height:<? echo ("$object_height");?>px;minWidth:<? echo ("$object_width");?>px"
+			 id="player">
+		</a> 
+		<script>	
+			flowplayer("player", "/flowplayer/flowplayer-3.2.7.swf", {
+				clip: {
+					scaling: 'fit',
+					metaData: false
+				},
+				plugins: {
+					controls: {
+						play:false,
+						volume:false,
+						mute:false,
+						time:false,
+						stop:false,
+						playlist:false,
+						fullscreen:true,
+						scrubber: false
+					}
+				}
+			});
+		</script>
+		<?
+		}
+		?>
+		
+		</div>
 	</div>
 	
 			
-	<a href="speed.php?stream=<? echo ("$scale_href");?>"> 
+	<a href="speed.php?stream=<? echo ("$scale_href");?>">
 		<img class="back" src="/styles/<? echo style_name; ?>/img/back.jpg" alt="Verander uw snelheid" />
 	</a>
 	<br />
-	<a href="../index.php?logout=1"> 
+	<a href="../index.php?logout=1">
 		<img class="exit" src="/styles/<? echo style_name; ?>/img/exit.jpg" alt="Uitloggen" />
 	</a>
 	
 	
 			
 </div>
+
 
 </body>
 </html>

@@ -97,6 +97,8 @@ $camArr = $cameras->getCamera($_GET["cid"]);
 				  output += '<PARAM NAME="archive" VALUE="ama.jar">';
 				  output += '<PARAM NAME="codebase" VALUE="';
 				  output += AppletDir + '">';
+				  output += '<PARAM NAME="MediaUsername" VALUE="root">';
+				  output += '<PARAM NAME="MediaPassword" VALUE="yzhc4m3r4">';
 				  output += '<PARAM NAME="ama_cgi-path" VALUE="axis-cgi">';
 				  output += '<PARAM NAME="cache_archive" VALUE="ama.jar, ptz.jar">';
 				  output += '<PARAM NAME="cache_version" VALUE="1.0.0.0, 1.2.0.0">';
