@@ -7,8 +7,8 @@ class Auth
 	# class constructor
 	public function Auth($username, $password)
 	{
-		$this->username = trim($username);
-		$this->password = trim($password);
+		$this->username = mysql_real_escape_string(trim($username));
+		$this->password = mysql_real_escape_string(trim($password));
 		
 		# create connection database
 		$this->con = new MysqlCon(dbHost, database, dbUser, dbPassword);
