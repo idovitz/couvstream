@@ -1,0 +1,25 @@
+Instellingen voor de Twitter app
+
+Tab Details
+	Op deze pagina staat alle informatie over je app.
+	Van deze informatie heb je alleen de "Consumer key" en de "Consumer secret" nodig die onder het kopje OAuth settings staan.
+
+Tab Settings
+	Application Details
+		Name: Couvstream
+		Description: Couvstream is een initiatief van het IJsselland Ziekenhuis met als doel het beschikbaar stellen van videobeelden 					aan ouders, via het internet, van hun baby die is opgenomen in het ziekenhuis.
+		Website: http://familienet.ysl.nl
+	
+	Application Icon
+		Zoek hier je icoontje op.
+	
+	Application Type
+		Access: Read and Write
+		Callback URL: http://familienet.ysl.nl/includes/social/Twitter/close.php
+
+	Organization
+		Organization name: Couvstream
+		Organization name: vul hier een website in.
+
+
+
