@@ -107,4 +107,10 @@ div.error
 	border: 1px solid #ff0000;
 }
 
+div.thumbcontainer
+{
+	border:1px solid black;
+	margin-left:50%;
+}
+
 

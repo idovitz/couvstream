@@ -1,0 +1,55 @@
+De instellingen voor de facebook App.
+Tab Instellingen
+	Subtab Algemeen:
+		Boven aan deze pagina staan de App ID en de App Secret.
+
+		Sandbox Mode: Uitgeschakeld (is belangrijk, anders werkt je app niet voor andere mensen).				
+		"Select how your app integrates with Facebook" = Website met Facebook-aanmelden.
+			Site URL: http://familienet.ysl.nl
+
+	Subtab Toegangsrechten
+		Default Activity Privacy: Openbaar
+		User & Friend Permissions: user_photos ; publish_actions
+		Extended Permissions: publish_stream ; read_stream ; photo_upload
+		Auth Token Parameter: URI Fragment(#access_token=...)
+		Authenticated Referrals: Uitgeschakeld
+
+	Subtab Geavanceerd
+		Authentication
+			App Type: Internet
+			Deauthorize Callback URL: leeg laten
+		Leeftijdsbeperkingen
+			Landsbeperkingen: leeg laten
+			Leeftijdsbeperkingen: Iedereen (13+)
+			Content Restrictions: niet aanvinken
+			Social Discovery: Ingeschakeld
+		Migrations
+			Stream post URL security: Uitgeschakeld
+			Events Timezone: Ingeschakeld
+			February 2013 Breaking Changes: Uitgeschakeld
+			Picture As Dictionary: Ingeschakeld
+			March 2013 Breaking Changes: Uitgeschakeld
+			April 2013 Breaking Changes: Uitgeschakeld
+		Security
+			Server IP Whitelist: leeg laten
+			Update Settings IP Whitelist: leeg laten
+			Update Notification Email: leeg laten
+			Set Client Token: Nee
+		Advertising
+			Advertising Accounts: leeg laten
+		External Platforms:
+			PlayStation Title ID(s): leeg laten
+			Xbox Title ID(s): leeg laten
+Tab App-gegevens
+	App-informatie
+		Moedertaal: Nederlands
+		Display Name: Couvstream
+		Tagline: Couvstream
+		Omschrijving: Vul zelf maar in
+		Gedetailleerd omschrijving: Vul zelf maar in
+		Explanation for Permissions: We hebben deze toestemming nodig voor het plaatsen van de foto in uw album.
+		Publisher (optional): leeg laten
+		Category: Foto
+	Contactgegevens:
+		Mag je allemaal zelf invullen.
+		

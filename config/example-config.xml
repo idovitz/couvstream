@@ -11,6 +11,16 @@
 		<decoders>no</decoders>
 		<local_network>192.168.0.0/16</local_network>
 	</general>
+	<social>
+		<social_media>yes</social_media>
+        <social_media_services>Facebook,Twitter,Email</social_media_services>
+		<facebook_appid></facebook_appid>
+		<facebook_secret></facebook_secret>
+		<facebook_callback_url>http://couvstream.example.com/includes/social/Facebook/close.php</facebook_callback_url>
+		<twitter_consumer_key></twitter_consumer_key>
+		<twitter_consumer_secret></twitter_consumer_secret>
+		<twitter_callback_url>https://couvstream.example.com/includes/social/Twitter/close.php</twitter_callback_url>
+	</social>
 	<database>
 		<dbHost>127.0.0.1</dbHost>
 		<database>couvstream</database>
@@ -26,8 +36,11 @@
 		<apacheUser>www-data</apacheUser>
 		<installPath>/var/www/couvstream</installPath>
 		<vlcPath>/usr/bin/vlc</vlcPath>
-		<nicePath>/usr/bin/nice</nicePath>>
-		<bitrates>[["CIF", "128", "1", "30", "Slowest"], ["CIF", "256", "1", "30", "Slow"], ["CIF", "384", "1", "20", "Fast"], ["4CIF", "512", "1", "30", "Extra fast"]]</bitrates>
+		<nicePath>/usr/bin/nice</nicePath>
+		>
+		<bitrates>[["CIF", "128", "1", "30", "Slowest"], ["CIF", "256", "1",
+			"30", "Slow"], ["CIF", "384", "1", "20", "Fast"], ["4CIF", "512",
+			"1", "30", "Extra fast"]]</bitrates>
 		<loglevel>1</loglevel>
 	</daemon>
 	<cameras>

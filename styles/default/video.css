@@ -1,16 +1,30 @@
-div.container
+body
 {
-	position:absolute;
-	top:50%;
-	left:50%;
-	width:36em;
-	height:30em;
-	margin-top:-15em;
-	margin-left:-18em;
-	border:0px solid gray;
-	font-family: verdana;
-	font-size:10pt 
-	
+	font-family:sans-serif;
+	font-size:12pt;
+	margin:auto;
+	margin-top:3%;
+	width:50em;
+	height:auto;
+	border:0px solid gray; 
+	overflow-x:hidden;
+	overflow-y:hidden;
+}
+a:link
+{
+	text-decoration:none !important;
+}
+a:visited
+{
+	text-decoration:none !important;
+}
+a:hover
+{
+	text-decoration:none !important;
+}
+a:active
+{
+	text-decoration:none !important;
 }
 
 div.footer
@@ -22,38 +36,128 @@ div.footer
 
 div.mplayer
 {
-	height:30em;
-	background-image:url('img/tvSmall.jpg');
-	background-repeat:no-repeat;
-	background-position:center;
+	height:35.8em;
+	width:45.35em;
+	margin-bottom:1em;
 }
 
-object
+#flowplayerDiv
 {
-	margin:40px 0px 0px 66px;
-}
-
-embed
-{
-	margin:51px 0px 0px 1px;
+	position: absolute;
+	border:2px solid #7CC142;
 }
 
 img.back
 {
-	position:relative;
-	left:29px;
-	top:-28px;
+	position:absolute;
+	margin-top:-4.3em;
 	border:0px;
-	
 }
 
 img.exit
 {
-	position:relative;
-	left:65px;
-	top:-63px;
-	border:0;
+	position:absolute;
+	margin-top:-5.5em;
+	margin-left:2.5em;
+	border:0px;
+}
+img.neemfoto
+{
+	position:absolute;
+	cursor:pointer;
+	margin-left:35.1em;
+	margin-top:-7.3em;
+}
+img.delete
+{
+	display:inline;
+	cursor:pointer;
+	margin-left:0.1em;
+}
+img.Facebook
+{
+	display:inline !important;
+	cursor:pointer;
+	margin-left:0.1em;
+}
+img.Twitter
+{
+	display:inline !important;
+	cursor:pointer;
+	margin-top:0.2em;
+}
+img.Email
+{
+	display:inline !important;
+	cursor:pointer;
+}
+img.Google
+{
+	dislpay:inline !important;
+	cursor:pointer;
+	margin-left:0.1em;
+	margin-bottom:0.1em;
 }
 
+div#socialThumb
+{
+	border:2px solid #7CC142;
+	position:absolute;
+	width:1.25em;
+	margin-left:10em;
+	margin-top:-7.2em;
+	background:#DDFFFF;
+}
 
+div.thumbcontainer
+{
+	margin-left:40em;
+	margin-top:-39.15em;
+	border:0px solid #7CC142;
+	background:#DDFFFF;
+	width:9.7em;
+	height:34.2em;	
+}
 
+div.thumb1
+{
+	border:2px solid #7CC142;
+	background-color:#DDDDDD;
+	margin-bottom:1.65em;
+	width:auto;
+	height:auto;
+	cursor:pointer;
+}
+img.ajax-loader
+{
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	width:270px;
+	height:15px;
+}
+
+div.noemFoto
+{
+	position:absolute;
+	margin-left:10em;
+	margin-top:-1.26em;
+}
+label.twit-ingelogd
+{
+	font-size:10pt;
+	text-align:right;
+	width:363px;;
+	position:absolute;
+}
+
+div#email-dialog
+{
+	overflow-x:hidden;
+	overflow-y:hidden;
+}
+div#tweeten-gelukt
+{
+	overflow-x:hidden;
+	overflow-y:hidden;
+}
