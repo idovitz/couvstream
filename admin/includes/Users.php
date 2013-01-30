@@ -13,28 +13,36 @@ class Users
 	
 	public function addUser($name, $cid, $expiretime)
 	{
-		$name = trim($name);
-		
-		# translate name to uid 
-		$uid = str_replace(" ", "_", strtolower($name));
-		
-		# check existing users for cid
-		$delusers = $this->con->getQuery("SELECT * FROM groups WHERE cid = ".$cid);
-		if(count($delusers) == 0)
+		$regex = '/[^a-zA-Z]+/';
+		if(preg_match($regex, $name))
 		{
-			if(count($this->con->getQuery("SELECT * FROM users WHERE uid = '".$uid."'")) == 0)
-			{
-				# create user
+			return "fout";
+		}
+		else
+		{
+			$name = trim($name);
+			
+			# translate name to uid
+			$uid = str_replace(" ", "_", strtolower($name));
+			
+			# check existing users for cid
+			$delusers = $this->con->getQuery("SELECT * FROM groups WHERE cid = ".$cid);
+					if(count($delusers) == 0)
+					{
+					if(count($this->con->getQuery("SELECT * FROM users WHERE uid = '".$uid."'")) == 0)
+					{
+					# create user
 				$passwd = $this->generatePassword(8);
 				$this->con->runQuery("INSERT INTO users (uid, password, name, expiredate, startdate) VALUES('".$uid."', '".$passwd."', '".$name."', DATE_ADD(NOW(), INTERVAL ".$expiretime." DAY), NOW())");
 				$this->con->runQuery("INSERT INTO groups (uid, cid) VALUES('".$uid."', ".$cid.")");
-				$this->con->runQuery("UPDATE cameras SET child_name = '".$name."' WHERE cid = '".$cid."'");
-				return true;
+						$this->con->runQuery("UPDATE cameras SET child_name = '".$name."' WHERE cid = '".$cid."'");
+						return true;
 			}else{
-				return false;
+			return false;
 			}
-		}else{
-			return $delusers[0];
+			}else{
+				return $delusers[0];
+			}
 		}
 	}
 	

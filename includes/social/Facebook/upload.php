@@ -50,7 +50,7 @@ function checkUser()
 	  		'loggedIn' => 'true',
 	  		'albums'   => $user_albums,
 	  		'access_token' => $access_token,
-	  		'fotonaam' => $_GET['fotonaam']
+	  		'foto' => $_GET['fotonaam']
   		));
 	} 
 	else 

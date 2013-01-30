@@ -161,3 +161,15 @@ div#tweeten-gelukt
 	overflow-x:hidden;
 	overflow-y:hidden;
 }
+
+
+img.closeimg
+{
+	margin-left:10em;
+}
+div.closetext
+{
+	position:absolute;
+	margin-left:13em;
+	margin-top:-14em;
+}

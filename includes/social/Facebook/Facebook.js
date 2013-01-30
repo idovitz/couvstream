@@ -1,7 +1,7 @@
 // Variable die belangrijk is voor het afbreken van de script op wens van de gebruiker
 var run = "";
 // Functie voor als de gebruiker op het Facebook icontje klikt
-function Facebook(fotodata)
+function Facebook(fotoData)
 {
 	$("#wait-dialog").dialog(
 			{
@@ -23,7 +23,7 @@ function Facebook(fotodata)
 				}
 			});
 			$('#wait-dialog').dialog('widget').find(".ui-dialog-titlebar").hide();
-	$.get("../includes/social/Facebook/upload.php",{functie: "checkUser", fotonaam: fotodata}, users_Facebook_check, 'json');
+	$.get("../includes/social/Facebook/upload.php",{functie: "checkUser", fotonaam: fotoData}, users_Facebook_check, 'json');
 }
 //Functie die checkt of de gebruiker is ingelogd op Facebook
 function users_Facebook_check(userData)
@@ -34,6 +34,7 @@ function users_Facebook_check(userData)
 	}
 	else
 	{
+		console.log(userData.login);
 		window.open(userData.login);
 		$.get("../includes/social/Facebook/upload.php", {functie: "checklogin", fotonaam: userData.fotonaam}, fbLoop, 'json');
 	}

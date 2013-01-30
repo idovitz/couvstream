@@ -37,9 +37,21 @@ if($name && $cid && $duedate && $_GET["edit"] < 1)
 	if($addresult === true)
 	{
 		header("Location: index.php");
-	}elseif($addresult === false){
+	}
+	elseif($addresult === false)
+	{
 		$add = "uid";
-	}else{
+	}
+	elseif($addresult === "fout")
+	{
+		?>
+		<script type="text/javascript" language="javascript">
+			alert("Speciale karakters en nummers zijn niet toegestaan");
+		</script>
+		<?php 
+	}	
+	else
+	{
 		$add = "cid";
 		$deluid = $addresult["uid"];
 		$deluser = $users->getUser($deluid);

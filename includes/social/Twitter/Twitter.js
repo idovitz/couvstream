@@ -1,7 +1,7 @@
 // Variable die belangrijk is voor het afbreken van de script op wens van de gebruiker
 var run = "";
 // Functie voor als de gebruiker op het Twitter icontje klikt
-function Twitter(fotodata)
+function Twitter(data)
 {
 	$("#wait-dialog").dialog(
 	{
@@ -14,17 +14,17 @@ function Twitter(fotodata)
 		at:'center',
 		open: function(){},
 		buttons:
+		{
+			Afbreken:function()
 			{
-				Afbreken:function()
-				{
-					run = "false";
-					$(this).dialog("close");
-				}
+				run = "false";
+				$(this).dialog("close");
 			}
+		}
 	});
 	$('#wait-dialog').dialog('widget').find(".ui-dialog-titlebar").hide();
 	
-	$.get("../includes/social/Twitter/upload.php",{functie: "checkUser", fotonaam: fotodata}, users_Twitter_check, 'json');
+	$.get("../includes/social/Twitter/upload.php",{functie: "checkUser", fotonaam: data}, users_Twitter_check, 'json');
 }
 //Functie die checkt of er iets fout gegaan is tijdens het verkrijgen van de request token
 function users_Twitter_check(data)
@@ -32,7 +32,7 @@ function users_Twitter_check(data)
 	if(data.error != 'true')
 	{
 		window.open(data.response);
-		setTimeout(function(){$.get("../includes/social/Twitter/upload.php",{functie: "getAccess", fotonaam: data.fotonaam, oauth_token: data.oauth_token, oauth_token_secret: data.oauth_token_secret}, twitLoop, 'json')},5000);
+		setTimeout(function(){$.get("../includes/social/Twitter/upload.php",{functie: "getAccess", fotonaam: data.fotonaam, oauth_token: data.oauth_token, oauth_token_secret: data.oauth_token_secret}, twitLoop, 'json')},3000);
 	}
 	else
 	{
@@ -52,11 +52,11 @@ function users_Twitter_check(data)
 				{
 					"Opnieuw":function()
 					{
+						$(this).dialog("close");
 						Twitter(data);
 					}
 				}
 		});
-		$('#twit-error').dialog('widget').find(".ui-dialog-titlebar").hide();
 	}
 }
 //Functie die checkt of de gebruiker al klaar is met inloggen
@@ -64,7 +64,7 @@ function twitLoop(data)
 {
 	if(run != "false")
 	{
-		if(data.error != 'true')
+		if(data.ready)
 		{
 			tweet_dialog(data);
 		}
@@ -72,6 +72,10 @@ function twitLoop(data)
 		{
 			setTimeout(function(){$.get("../includes/social/Twitter/upload.php",{functie: "getAccess", fotonaam: data.fotonaam, oauth_token: data.oauth_token, oauth_token_secret: data.oauth_token_secret}, twitLoop, 'json');},3000);
 		}
+	}
+	else
+	{
+		run = "true";
 	}
 }
 //Functie die het upload scherm laat zien
