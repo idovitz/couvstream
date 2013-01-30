@@ -3,8 +3,8 @@ require 'facebook-platform/php/facebook.php';
 include_once($_SERVER["DOCUMENT_ROOT"]."/includes/config.php");
 
 $facebook = new Facebook(array(
-		'appId'  => '404853396236151',
-		'secret' => '6ba9f4eda5ff7e8d3a74b430086e1648',
+		'appId'  => facebook_appid,
+		'secret' => facebook_secret,
 		'cookie' => true,
 ));
 
