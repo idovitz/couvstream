@@ -55,66 +55,42 @@ function getAccess()
 {
 	require_once('twitteroauth/twitteroauth.php');
 	
-	$connection = new TwitterOAuth(twitter_consumer_key, twitter_consumer_secret, $_GET['oauth_token'], $_GET['oauth_token_secret']);
-	//Kijken of de gebruiker al klaar is met inloggen.
-	if($_SESSION['oauth_verifier'] != "")
-	{
-		$xml_access_token = $connection->getAccessToken(array('oauth_verifier' => $_SESSION['oauth_verifier']));
-
-		$_SESSION['access_token'] = $xml_access_token;
-
-		// Stukje script voor het debuggen, als er iets fout gaat, dit uncommenten.
- 		/* foreach($xml_access_token as $key => $value)
-		{
-			print("|| ".$key." || => %% ".$value." %%\n");
-		} */ 
+	//Checken of we de oauth tokens hebben gekregen
+	if (!empty($_SESSION['access_token']) &&
+			!empty($_SESSION['access_token']['oauth_token']) &&
+			!empty($_SESSION['access_token']['oauth_token_secret'])) 
+	{			
+		$connection = new TwitterOAuth(twitter_consumer_key, twitter_consumer_secret, $_SESSION['access_token']['oauth_token'], $_SESSION['access_token']['oauth_token_secret']);
+		$verify = $connection->get('account/verify_credentials');
 		
-		//Checken of we de oauth tokens hebben gekregen
-		if (!empty($_SESSION['access_token']) &&
-				!empty($_SESSION['access_token']['oauth_token']) &&
-				!empty($_SESSION['access_token']['oauth_token_secret'])) 
-		{			
-			$connection = new TwitterOAuth(twitter_consumer_key, twitter_consumer_secret, $_SESSION['access_token']['oauth_token'], $_SESSION['access_token']['oauth_token_secret']);
-			$verify = $connection->get('account/verify_credentials');
-			
-			//Checken of het verifieren goed is gegaan, 200 is goed
-			if($connection->http_code == 200)
-			{
-				return(json_encode($twitcheck = array(
-						'fotonaam' => $_GET['fotonaam'],
-						'token' => $_SESSION['access_token']['oauth_token'],
-						'secret' => $_SESSION['access_token']['oauth_token_secret'],
-						'naam' => $_SESSION['access_token']['screen_name'],
-						'error' => 'false'
-					)));
-			}
-			else 
-			{
-				return(json_encode($twitcheck = array(
-						'fotonaam' => $_GET['fotonaam'],
-						'error' => 'true'
-					)));
-			}
-		}
-		else
+		//Checken of het verifieren goed is gegaan, 200 is goed
+		if($connection->http_code == 200)
 		{
 			return(json_encode($twitcheck = array(
-				'fotonaam' => $_GET['fotonaam'],
-				'error' => 'true',
-				'access_token' => 'no',
-				'oauth_token' => $_GET['oauth_token'],
-				'oauth_token_secret' => $_GET['oauth_token_secret'],
-				'oauth_verifier' => $_SESSION['oauth_verifier']
-			)));
+					'fotonaam' => $_GET['fotonaam'],
+					'token' => $_SESSION['access_token']['oauth_token'],
+					'secret' => $_SESSION['access_token']['oauth_token_secret'],
+					'naam' => $_SESSION['access_token']['screen_name'],
+					'error' => 'false',
+					'ready' => true
+				)));
+		}
+		else 
+		{
+			return(json_encode($twitcheck = array(
+					'fotonaam' => $_GET['fotonaam'],
+					'error' => 'true'
+				)));
 		}
 	}
 	else
 	{
 		return(json_encode($twitcheck = array(
-				'fotonaam' => $_GET['fotonaam'],
-				'error' => 'true',
-				'oauth_token' => $_GET['oauth_token'],
-				'oauth_token_secret' => $_GET['oauth_token_secret']
+			'fotonaam' => $_GET['fotonaam'],
+			'error' => 'true',
+			'access_token' => 'no',
+			'oauth_token' => $_GET['oauth_token'],
+			'oauth_token_secret' => $_GET['oauth_token_secret'],
 		)));
 	}
 }

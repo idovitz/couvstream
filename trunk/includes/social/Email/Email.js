@@ -1,5 +1,5 @@
 // Functie voor als de gebruiker op het Email icontje wordt geklikt
-function Email(fotodata)
+function Email(data)
 {
 	$("#wait-dialog").dialog(
 			{
@@ -13,7 +13,7 @@ function Email(fotodata)
 				open: function(){}
 			});
 			$('#wait-dialog').dialog('widget').find(".ui-dialog-titlebar").hide();
-	$.get("../includes/social/Email/upload.php",{functie: "checkUser", fotonaam: fotodata}, users_Email_check, 'json');
+	$.get("../includes/social/Email/upload.php",{functie: "checkUser", fotonaam: data.fotonaam}, users_Email_check, 'json');
 }
 //Functie die het email dialogje laat zien
 function users_Email_check(data)
