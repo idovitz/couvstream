@@ -21,7 +21,7 @@ elseif($_GET['functie'] == "checklogin")
 // Functie checkt of de user is ingelogd en de app heeft geautoriseerd
 function checkUser()
 {
-	require 'facebook-platform/php/facebook.php';
+	require_once 'facebook-platform/php/facebook.php';
 	
 	$facebook = new Facebook(array(
 			'appId'  => facebook_appid,
@@ -72,7 +72,7 @@ function checkUser()
 // Checken of de user al is ingelogd, hierin zit niet de login url
 function checklogin()
 {
-	require 'facebook-platform/php/facebook.php';
+	require_once 'facebook-platform/php/facebook.php';
 	
 	$facebook = new Facebook(array(
 			'appId'  => facebook_appid,
@@ -117,7 +117,7 @@ function checklogin()
 // functie die de foto upload naar facebook
 function fbUploaden()
 {	
-	require 'facebook-platform/php/facebook.php';
+	require_once 'facebook-platform/php/facebook.php';
 	
 	$facebook = new Facebook(array(
 			'appId'  			=> facebook_appid,
@@ -149,6 +149,7 @@ function fbUploaden()
 	{
 		$album_uid = $_GET['fbAlbumSelect'];
 	}
+	
 	// Upload een foto naar het album
 	$photo_details = array(
 			'name'=> $_GET['opmerking'],

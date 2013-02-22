@@ -34,7 +34,6 @@ function users_Facebook_check(userData)
 	}
 	else
 	{
-		console.log(userData.login);
 		window.open(userData.login);
 		$.get("../includes/social/Facebook/upload.php", {functie: "checklogin", fotonaam: userData.fotonaam}, fbLoop, 'json');
 	}
@@ -55,8 +54,7 @@ function fbLoop(userData)
 	}
 }
 //Functie die het upload scherm laat zien
-function fbUpload(userData)
-{
+function fbUpload(userData){
 	var t = '<option disabled="disabled" selected="selected">Selecteer een Facebook album</option><option value="nieuwFbAlbum">Nieuw album</option>';
 	for (var i = 0; i < userData.albums.data.length; i++)
 	{
@@ -86,18 +84,20 @@ function fbUpload(userData)
 				var opmerking = $("#opmerking").val();
 				
 				$("#wait-dialog").dialog(
-						{
-							modal: true,
-							resizable: false, 
-							draggable: false,
-							width:'auto',
-							height:90,
-							my:'center',
-							at:'center',
-							open: function(){}
-						});
-						$('#wait-dialog').dialog('widget').find(".ui-dialog-titlebar").hide();
-				$.get("/includes/social/Facebook/upload.php", {functie: "fbUploaden", fotonaam:userData.fotonaam, fbAlbumSelect: fbAlbumSelect, fbAlbumNaam : fbAlbumNaam, opmerking : opmerking}, fbUploaderFinish, 'json');
+				{
+					modal: true,
+					resizable: false, 
+					draggable: false,
+					width:'auto',
+					height:90,
+					my:'center',
+					at:'center',
+					open: function(){}
+				});
+				
+				$('#wait-dialog').dialog('widget').find(".ui-dialog-titlebar").hide();
+				
+				$.get("/includes/social/Facebook/upload.php", {functie: "fbUploaden", fotonaam:userData.foto, fbAlbumSelect: fbAlbumSelect, fbAlbumNaam : fbAlbumNaam, opmerking : opmerking}, fbUploaderFinish, 'json');
 			}
 		}
 	});
