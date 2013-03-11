@@ -276,7 +276,8 @@ class StreamControl:
 	# kill all streams from ip	
 	def killStream(self, ip):
 		for p in psutil.process_iter():
-			if p.name == "vlc":
+			cmd = " ".join(psutil.Process(p.pid).cmdline)
+			if p.name == "vlc" and "dummy" not in cmd:
 				if ''.join(p.cmdline).find('@%s/' % ip) != -1:
 					p.kill()
 	
@@ -287,7 +288,8 @@ class StreamControl:
 		retArr = {}		
 		
 		for p in psutil.process_iter():
-			if p.name == "vlc":
+			cmd = " ".join(psutil.Process(p.pid).cmdline)
+			if p.name == "vlc" and "dummy" not in cmd:
 				for con in p.get_connections(kind="tcp"):
 					if con.status == 'ESTABLISHED' and con.remote_address[0] == "127.0.0.1":
 						streams += 1
@@ -318,8 +320,9 @@ class StreamControl:
 		self.l.log(3, "checkStreams started")
 		
 		for p in psutil.process_iter():
-			if p.name == "vlc":
-				self.l.log(3, "checkStreams: %s" % p)
+			cmd = " ".join(psutil.Process(p.pid).cmdline)
+			if p.name == "vlc" and "dummy" not in cmd:
+				self.l.log(3, "checkStreams: %s (%s)" % (p, cmd))
 				kill = 1
 				for con in p.get_connections(kind="tcp"):
 					if con.family == socket.AF_INET and con.status == "LISTEN":
@@ -336,7 +339,8 @@ class StreamControl:
 		for nproc in self.nomKill:
 			exist = 0
 			for p in psutil.process_iter():
-				if p.name == "vlc":
+				cmd = " ".join(psutil.Process(p.pid).cmdline)
+				if p.name == "vlc" and "dummy" not in cmd:
 					if p.pid == nproc:
 						exist = 1
 			
