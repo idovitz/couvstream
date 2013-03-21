@@ -46,7 +46,7 @@ function maakFoto()
 	
 	$count = count($_SESSION["sessieImages"]);
 	
-	if($count < 4)
+	if($count < 4 && $cam["blocked"] != 1)
 	{
 		// ophalen jpg van camera
 		$imageData = file_get_contents('http://'.$cam['ip'].'/axis-cgi/jpg/image.cgi?resolution=4CIF&compression=15&clock=1&date=1&text=1&textstring=IJsselland%20Ziekenhuis&dummy=1347438687695');
@@ -81,10 +81,18 @@ function maakFoto()
 				'alle fotos' => $_SESSION['sessieImages']
 				));
 	}
-	else 
+	else if($cam["blocked"] == 1)
 	{
 		return json_encode($errorar = array(
-				'error' => true
+				'error' => true,
+				'reason' => "blocked"
+				));
+	}
+	else
+	{
+		return json_encode($errorar = array(
+				'error' => true,
+				'reason' => "limit"
 				));
 	}
 }

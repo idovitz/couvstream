@@ -120,8 +120,7 @@ $mediaUrl = $stream->getUrl();
 	</div>		
 	<!-- Popup dialog als de gebruiker een 5e foto wilt maken -->
 	<div id='dialog-message' title='Oeps!' style="display:none;">
-		<span class="ui-icon ui-icon-alert" style="float:left; margin:0 9px 50px 0;"></span>
-		U kunt maximaal 4 foto's maken, verwijder een foto om een andere foto te maken.
+		
 	</div>
 	
 	<!-- Popup dialog met daarin de foto op ware grootte -->
