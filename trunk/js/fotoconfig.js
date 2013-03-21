@@ -14,7 +14,11 @@ function neemfoto(button)
 
 function logout(event)
 {
-	$.get("fotoconfig.php", {functie: "logout"});
+	$.get("fotoconfig.php", {functie: "logout"}, onLogout, 'json');
+}
+
+function onLogout(data){
+	window.location.replace("../index.php?logout=1");
 }
 
 //Als er geen error terug komt, foto doorsturen naar andere functie
@@ -67,7 +71,6 @@ function plaatsThumb(fotonaam){
 	var thumb = $("<div/>")
 		.attr("class", "thumb1")
 		.attr("id", "thumb"+fotonaam)
-		.attr("style", "display: none;")
 		.append(
 			$("<img />")
 				.attr("class", "thumb")
@@ -94,7 +97,6 @@ function plaatsThumb(fotonaam){
 		);
 	
 	thumbContainer.append(thumb);
-	thumb.slideDown('fast');
 	
 	if(socialMedia == "yes"){
 		for (var s = 0; s < socialMediaServ.length; s++)
