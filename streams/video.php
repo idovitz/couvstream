@@ -108,7 +108,7 @@ $mediaUrl = $stream->getUrl();
 		<img class="back" src="/styles/<? echo style_name; ?>/img/back.jpg" title="Verander uw snelheid" alt="Verander uw snelheid" />
 	</a>
 	<br />
-	<a id="logout" onclick="logout()" href="../index.php?logout=1">
+	<a id="logout" onclick="logout()" href="javascript:void(0)">
 		<img class="exit" src="/styles/<? echo style_name; ?>/img/exit.jpg" title="Uitloggen" alt="Uitloggen" />
 	</a>
 	<br />

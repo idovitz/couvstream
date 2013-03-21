@@ -134,7 +134,7 @@ function logout()
 				}
 			}
 		}
-		closedir($handle);
+		closedir($handle1);
 	}
 	$path2 = "../streams/tmp/thumb";
 	if ($handle2 = opendir($path2))
@@ -149,7 +149,14 @@ function logout()
 				}
 			}
 		}
-		closedir($handle);
+		closedir($handle2);
+	}
+	
+	foreach($_SESSION['sessieImages'] as $image){
+		unlink($path1."/".$image.".jpg");
+		unlink($path2."/".$image.".jpg");
+		
+		$_SESSION["sessieImages"] = array();
 	}
 }
 ?>
