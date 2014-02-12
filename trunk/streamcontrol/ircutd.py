@@ -4,8 +4,10 @@
 # Copyright (C) 2007  IJSSELLAND ZIEKENHUIS
 ###################################################
 
-import xml.etree.ElementTree as ET
-import os, string, sys, smtplib, time, urllib2, socket
+import ephem
+import datetime
+from dateutil import tz
+import os, string, sys, smtplib, time, socket
 from SOAPpy import SOAPProxy, Error
 from utils import *
 
@@ -40,23 +42,25 @@ def switchIrcut(n):
 	server.quit()
 
 def getSunTimes():
-	try:
-		tree = ET.parse(urllib2.urlopen("http://www.earthtools.org/sun/51.562069/4.334720/%s/%s/99/1" % (time.localtime()[2],time.localtime()[1])))
-	except urllib2.HTTPError, e:
-		l.log(1, "failed to receive new times: %s" % e)
-		return 0
+	obs = ephem.Observer()
+	obs.lat = '51.52'
+	obs.long= '4.78'
+	obs.elev = -10
+	obs.pressure= 0
+	obs.horizon = '-1'
 	
-	# get xml root
-	root = tree.getroot()
+	sun = ephem.Sun()
+	
+	from_zone = tz.tzutc()
+	rise_time = obs.previous_rising(sun, use_center=True).datetime()
+	set_time = obs.next_setting(sun, use_center=True).datetime()
 
-	sunset = []
-	for t in root.getiterator("sunset")[0].text.split(":")[0:2]:
-		sunset.append(int(t))
-	sunrise = []
-	for t in root.getiterator("sunrise")[0].text.split(":")[0:2]:
-		sunrise.append(int(t))
+	to_zone = tz.tzlocal()
+	
+	rise_time = rise_time.replace(tzinfo=from_zone)
+	set_time = set_time.replace(tzinfo=from_zone)
 
-	return [sunset,sunrise]
+	return [[rise_time.astimezone(to_zone).hour,rise_time.astimezone(to_zone).minute],[set_time.astimezone(to_zone).hour, set_time.astimezone(to_zone).minute]]
 #	return [[22,25],[22,27]]
 
 # DEAMONIZE
