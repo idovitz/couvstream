@@ -36,11 +36,11 @@ class Stream
 	{
 		if(strstr($_SERVER['HTTP_USER_AGENT'],'iPhone') || strstr($_SERVER['HTTP_USER_AGENT'],'iPod') || strstr($_SERVER['HTTP_USER_AGENT'],'iPad'))
 		{
-			$this->muxstr = "http";
+			$this->muxstr = "https";
 			$this->mux = "1";
 			$this->ext = "mp4";
 		}else{
-			$this->muxstr = "http";
+			$this->muxstr = "https";
 			$this->mux = "0";
 			$this->ext = "flv";
 		}
