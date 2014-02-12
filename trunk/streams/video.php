@@ -40,9 +40,9 @@ $mediaUrl = $stream->getUrl();
 		?>
 		<script type="text/javascript" src="/flowplayer/flowplayer.min.js"></script>
 		<script type="text/javascript" src="/flowplayer/flowplayer.ipad-3.2.2.min.js"></script>
-		<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
-		<script type="text/javascript" src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
-		<link rel="stylesheet" type="text/css" href="/styles/ysl/css/custom-theme/jquery-ui-1.9.0.custom.css" />
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.8.2.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+		<link rel="stylesheet" type="text/css" href="/styles/<? echo style_name;?>/css/custom-theme/jquery-ui-1.9.0.custom.css" />
 		<script type="text/javascript" src="/js/fotoconfig.js"></script>
 		<?php 
 			if(social_media == "yes")
