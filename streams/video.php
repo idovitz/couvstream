@@ -38,8 +38,9 @@ $mediaUrl = $stream->getUrl();
 			$scale_href = "cif";
 		}
 		?>
-		<script type="text/javascript" src="/flowplayer/flowplayer.min.js"></script>
-		<script type="text/javascript" src="/flowplayer/flowplayer.ipad-3.2.2.min.js"></script>
+		
+		<link rel="stylesheet" href="//releases.flowplayer.org/5.4.6/skin/playful.css">
+		
 		<script type="text/javascript" src="https://code.jquery.com/jquery-1.8.2.js"></script>
 		<script type="text/javascript" src="https://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
 		<link rel="stylesheet" type="text/css" href="/styles/<? echo style_name;?>/css/custom-theme/jquery-ui-1.9.0.custom.css" />
@@ -54,54 +55,29 @@ $mediaUrl = $stream->getUrl();
 				}
 			};
 		?>
+		
+		<script src="//releases.flowplayer.org/5.4.6/flowplayer.min.js"></script>
+		
+		<script>
+			flowplayer.conf = {
+				ratio: 3/4,
+				embed: false,
+				autoplay: true
+			};
+</script>
+		
+		
 		<title><? echo longname; ?></title>
 	</head>
 <body>
 	<div class="mplayer">
-		<div id="flowplayerDiv">
 		
-		<?
-		if(strstr($_SERVER['HTTP_USER_AGENT'],'iPhone') || strstr($_SERVER['HTTP_USER_AGENT'],'iPod') || strstr($_SERVER['HTTP_USER_AGENT'],'iPad'))
-		{
-		?>
-		<video src="<? echo $mediaUrl; ?>" />
-		
-		<?
-		}else{
-		?>
-		<a  
-			 href="<? echo $mediaUrl; ?>"
-			 style="display:block;width:<? echo ("$object_width");?>px;height:<? echo ("$object_height");?>px;minWidth:<? echo ("$object_width");?>px"
-			 id="player">
-		</a> 
-		<script>	
-			flowplayer("player", {src: "/flowplayer/flowplayer-3.2.7.swf", wmode: 'opaque'}, {
-				clip: 
-				{
-					scaling: 'fit',
-					metaData: false
-				},
-				plugins: 
-				{
-					controls: 
-					{
-						play:false,
-						volume:false,
-						mute:false,
-						time:false,
-						stop:false,
-						playlist:false,
-						fullscreen:true,
-						scrubber: false
-					}
-				}
-			});
-		</script>
-		<?
-		}
-		?>
-		
+		<div class="flowplayer" style="width: <? echo ("$object_width");?>px;">
+			<video>
+				<source src="<? echo $mediaUrl; ?>" type='video/flash' />
+			</video>
 		</div>
+		
 	</div>
 			
 	<a href="speed.php?stream=<? echo ("$scale_href");?>">
