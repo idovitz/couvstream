@@ -62,7 +62,10 @@ $mediaUrl = $stream->getUrl();
 			flowplayer.conf = {
 				ratio: 3/4,
 				embed: false,
-				autoplay: true
+				autoplay: true,
+				bufferTime: 0,
+				engine: 'flash'
+				
 			};
 </script>
 		
