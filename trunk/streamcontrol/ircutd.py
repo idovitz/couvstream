@@ -60,7 +60,7 @@ def getSunTimes():
 	rise_time = rise_time.replace(tzinfo=from_zone)
 	set_time = set_time.replace(tzinfo=from_zone)
 
-	return [[rise_time.astimezone(to_zone).hour,rise_time.astimezone(to_zone).minute],[set_time.astimezone(to_zone).hour, set_time.astimezone(to_zone).minute]]
+	return [[set_time.astimezone(to_zone).hour, set_time.astimezone(to_zone).minute],[rise_time.astimezone(to_zone).hour,rise_time.astimezone(to_zone).minute]]
 #	return [[22,25],[22,27]]
 
 # DEAMONIZE
