@@ -4,9 +4,11 @@
 # Copyright (C) 2007  IJSSELLAND ZIEKENHUIS
 ###################################################
 
-import os, sys, string, SOAPpy, time, socket, urllib2, psutil
+import os, sys, string, SOAPpy, time, socket, urllib2, psutil, base64
 from subprocess import Popen, PIPE
+
 from utils import *
+
 
 # timeout in seconds
 timeout = 4
@@ -130,24 +132,24 @@ class StreamControl:
 		req = urllib2.Request(url)
 		self.l.log(3, "Get Url: %s" % url)
 		
-		# Create an OpenerDirector with support for Basic HTTP Authentication...
-		auth_handler = urllib2.HTTPBasicAuthHandler()
-		auth_handler.add_password('/', host, self.config.camUser, self.config.camPass)
-		opener = urllib2.build_opener(auth_handler)
-		# ...and install it globally so it can be used with urlopen.
-		urllib2.install_opener(opener)
+		# basic auth
+		base64string = base64.encodestring('%s:%s' % (self.config.camUser, self.config.camPass)).replace('\n', '')
+		req.add_header("Authorization", "Basic %s" % base64string)  
+		
 		
 		try:
-		    response = urllib2.urlopen(req)
+			response = urllib2.urlopen(req)
+			return response.readlines()
 		except urllib2.URLError, e:
-		    if hasattr(e, 'reason'):
-		    	self.l.log(1, "We failed to reach a server. (%s) reason: %s" % (url, e.reason))
-		        return False
-		    elif hasattr(e, 'code'):
-		    	self.l.log(1, "The server could not fulfill the request. (%s) Error code: %s" % (url, e.code))
-		        return False
-		else:
-		   return response.readlines()
+			if hasattr(e, 'reason'):
+				self.l.log(1, "We failed to reach a server. (%s) reason: %s" % (url, e.reason))
+				return False
+			elif hasattr(e, 'code'):
+				self.l.log(1, "The server could not fulfill the request. (%s) Error code: %s" % (url, e.code))
+				return False
+		except Error, e:
+			self.l.log(1, "The server could not fulfill the request. (%s) : %s" % (url, e.code))
+			return False
 	
 	###
 	# get registered addresses
