@@ -84,7 +84,7 @@ function plaatsThumb(fotonaam){
 				.attr("class", "socialThumb"+fotonaam)
 				.append(
 					$("<img />")
-						.attr("class", "delete")
+						.attr("class", "SocialIcon")
 						.attr("id", "delete"+fotonaam)
 						.attr("src", "/styles/default/img/delete.png")
 						.attr("title", "Verwijderen")
@@ -102,8 +102,8 @@ function plaatsThumb(fotonaam){
 		for (var s = 0; s < socialMediaServ.length; s++)
 		{
 			var socialicon = $("<img />")
-				.attr("class", socialMediaServ[s])
-				.attr("src", "/styles/default/img/"+socialMediaServ[s]+".png")
+				.attr("class", "SocialIcon")
+				.attr("src", "/includes/social/"+socialMediaServ[s]+"/icon.png")
 				.attr("title", socialMediaServ[s])
 				.attr("alt", socialMediaServ[s])
 				.attr("onclick", socialMediaServ[s]+"('"+fotonaam+"')");
