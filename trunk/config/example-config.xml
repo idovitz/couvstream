@@ -13,7 +13,7 @@
 	</general>
 	<social>
 		<social_media>yes</social_media>
-        <social_media_services>Facebook,Twitter,Email</social_media_services>
+        <social_media_services>Facebook,Twitter,Email,Save</social_media_services>
 		<facebook_appid></facebook_appid>
 		<facebook_secret></facebook_secret>
 		<facebook_callback_url>http://couvstream.example.com/includes/social/Facebook/close.php</facebook_callback_url>

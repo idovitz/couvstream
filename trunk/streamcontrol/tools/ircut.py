@@ -4,7 +4,6 @@
 # Copyright (C) 2007  IJSSELLAND ZIEKENHUIS
 ###################################################
 
-import elementtree.ElementTree as ET
 import os, string, sys, smtplib, time, urllib, socket
 from SOAPpy import SOAPProxy, Error
 

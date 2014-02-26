@@ -68,35 +68,12 @@ img.neemfoto
 	margin-left:35.1em;
 	margin-top:-7.3em;
 }
-img.delete
-{
-	display:inline;
-	cursor:pointer;
-	margin-left:0.1em;
-}
-img.Facebook
+
+img.SocialIcon
 {
 	display:inline !important;
 	cursor:pointer;
-	margin-left:0.1em;
-}
-img.Twitter
-{
-	display:inline !important;
-	cursor:pointer;
-	margin-top:0.2em;
-}
-img.Email
-{
-	display:inline !important;
-	cursor:pointer;
-}
-img.Google
-{
-	dislpay:inline !important;
-	cursor:pointer;
-	margin-left:0.1em;
-	margin-bottom:0.1em;
+	margin:0.1em;
 }
 
 div#socialThumb
